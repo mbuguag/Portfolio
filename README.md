@@ -73,7 +73,7 @@ VITE_SITE_URL=https://joseph-personal-portfolio.vercel.app/
 2. Generate `robots.txt` and `sitemap.xml` files:
 
 ```bash
-SITE_URL=https://joseph-personal-portfolio.vercel.app/npm run seo:generate
+SITE_URL=https://joseph-personal-portfolio.vercel.app npm run seo:generate
 ```
 
 This writes:

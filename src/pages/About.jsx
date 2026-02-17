@@ -19,20 +19,23 @@ export default function About() {
 
           <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
             I'm{" "}
-            <span className="font-semibold text-green-500">Joseph Mbugua</span>{" "}
-            — a software engineer specializing in Java Spring Boot, React, and
-            modern full-stack web applications.
+            <span className="font-semibold text-green-500">Joseph Mbugua:</span>{" "}
+            AJunior Systems Engineer and Backend Engineer with hands on
+            experience in Windows Server administration, enterprise
+            virtualization, and production system support.
           </p>
 
           <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-            I build scalable, secure, and maintainable software solutions that
-            solve real-world problems. Passionate about learning, AI
-            integration, and delivering clean code.
+            I work across systems infrastructure, network troubleshooting,
+            enterprise communication platforms, and backend services using Java
+            Spring Boot, REST APIs, and Odoo ERP customization.
           </p>
 
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            My mission is to turn complex ideas into elegant, high-performing
-            applications that create impact for businesses and users alike.
+            I leverage AI-assisted workflows and automation to improve
+            operational efficiency, documentation quality, and issue resolution,
+            with a strong focus on secure, scalable, and high-performance
+            enterprise systems.
           </p>
         </motion.div>
 

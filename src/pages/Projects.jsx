@@ -78,7 +78,7 @@ export default function Projects() {
                     </a>
                   )}
 
-                  {project.github && (
+                  {/* {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
@@ -88,7 +88,7 @@ export default function Projects() {
                       <Github size={16} className="mr-1" />
                       Source Code
                     </a>
-                  )}
+                  )} */}
                 </div>
               </div>
             </motion.article>

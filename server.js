@@ -1,27 +1,70 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const port = process.env.PORT || 3000;
+import { createServer } from "node:http";
+import { existsSync, readFileSync, statSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-// Middleware for future backend API
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distDir = path.join(__dirname, "dist");
+const port = Number(process.env.PORT) || 3000;
 
-// Serve static files (your current frontend)
-app.use(express.static(path.join(__dirname, 'dist')));
+const contentTypes = {
+  ".html": "text/html; charset=utf-8",
+  ".js": "application/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".pdf": "application/pdf",
+};
 
-// Future API routes can go here
-app.use('/api', (req, res, next) => {
-  // This will be your backend API endpoint
-  // For now, just a placeholder
-  res.json({ message: 'API endpoint - backend coming soon!' });
-});
+const send = (res, statusCode, body, headers = {}) => {
+  res.writeHead(statusCode, headers);
+  res.end(body);
+};
 
-// SPA fallback - must be after API routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
+createServer((req, res) => {
+  const url = new URL(req.url || "/", `http://${req.headers.host}`);
+  const pathname = decodeURIComponent(url.pathname);
 
-app.listen(port, '0.0.0.0', () => {
+  if (pathname === "/api") {
+    send(
+      res,
+      200,
+      JSON.stringify({ message: "API endpoint - backend coming soon!" }),
+      { "Content-Type": "application/json; charset=utf-8" },
+    );
+    return;
+  }
+
+  const normalizedPath = pathname === "/" ? "/index.html" : pathname;
+  const filePath = path.join(distDir, normalizedPath);
+
+  if (existsSync(filePath) && statSync(filePath).isFile()) {
+    const ext = path.extname(filePath).toLowerCase();
+    const contentType =
+      contentTypes[ext] || "application/octet-stream; charset=utf-8";
+    send(res, 200, readFileSync(filePath), { "Content-Type": contentType });
+    return;
+  }
+
+  const indexFile = path.join(distDir, "index.html");
+  if (existsSync(indexFile)) {
+    send(res, 200, readFileSync(indexFile), {
+      "Content-Type": "text/html; charset=utf-8",
+    });
+    return;
+  }
+
+  send(
+    res,
+    404,
+    "Build output not found. Run `npm run build` before `npm start`.",
+    { "Content-Type": "text/plain; charset=utf-8" },
+  );
+}).listen(port, "0.0.0.0", () => {
   console.log(`Server running on port ${port}`);
 });

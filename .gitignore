@@ -26,3 +26,4 @@ keys
 keys.pub
 *.pem
 *.key
+.history

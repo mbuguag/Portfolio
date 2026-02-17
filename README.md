@@ -61,3 +61,21 @@ VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
 Without these values, the contact form will render but sending will fail.
+
+## SEO Setup
+
+1. Set your production domain for SPA metadata:
+
+```bash
+VITE_SITE_URL=https://joseph-personal-portfolio.vercel.app/
+```
+
+2. Generate `robots.txt` and `sitemap.xml` files:
+
+```bash
+SITE_URL=https://joseph-personal-portfolio.vercel.app/npm run seo:generate
+```
+
+This writes:
+- `public/robots.txt`
+- `public/sitemap.xml`

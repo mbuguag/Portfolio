@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
+import SeoManager from "./components/SeoManager";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Resume from "./pages/Resume";
@@ -12,6 +13,7 @@ import { AnimatePresence } from "framer-motion";
 function App() {
   return (
     <>
+      <SeoManager />
       <Navbar />
       <ScrollToTop />
       <div className="pt-16">

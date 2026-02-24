@@ -182,8 +182,8 @@ export default function Contact() {
         )}
         {!isEmailConfigured && status.type !== "error" && (
           <p className="text-amber-600 dark:text-amber-400 mt-4">
-            Email service is not configured. Add EmailJS environment variables
-            to enable this form.
+            {/* Email service is not configured. Add EmailJS environment variables
+            to enable this form. */}
           </p>
         )}
 
